@@ -19,6 +19,7 @@ namespace car
             OdomAckermann();
             void init(float wheel_diameter, float wheel_displacement, float axis_displacement);
             void update(float motor_speed_left, float motor_speed_right, float streering_angle);
+            void getPose(car::com::objects::Pose &pose) const;
 
         private:
             float wheel_diameter_;

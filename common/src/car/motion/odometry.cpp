@@ -26,3 +26,7 @@ void OdomAckermann::init(float wheel_diameter, float wheel_displacement, float a
     wheel_displacement_ = wheel_displacement;
     axis_displacement_ = axis_displacement;
 }
+
+void OdomAckermann::getPose(car::com::objects::Pose &pose) const{
+    pose = pose_;
+}
