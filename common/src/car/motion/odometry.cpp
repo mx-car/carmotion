@@ -16,9 +16,15 @@ OdomAckermann::OdomAckermann()
 void OdomAckermann::update(float motor_speed_left, float motor_speed_right, float streering_angle){
     uint32_t now = micros();
     if(tstamp_last_update == 0) {
-        tstamp_last_update = now;
         pose_ = car::com::objects::Pose(0,0,0);
+    } else {
+        double dt = (now - tstamp_last_update) / 1000000.;
+        double w = (motor_speed_left + motor_speed_right) / 2.;
+        double v = w * M_PI * wheel_diameter_;
+        double dx = v*dt;
+        pose_.x += dx;
     }
+    tstamp_last_update = now;
 }
 
 void OdomAckermann::init(float wheel_diameter, float wheel_displacement, float axis_displacement){
